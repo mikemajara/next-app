@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import {
   Box,
   HStack,
-  Icon,
   Menu,
   MenuButton,
   Stack,
@@ -17,51 +16,26 @@ import { Link } from "@chakra-ui/next-js";
 import { ABox, AMenuButton } from "@/components/animated";
 import { usePathname, useRouter } from "next/navigation";
 import { isHotkeyPressed, useHotkeys } from "react-hotkeys-hook";
-import { Icons } from "./icons";
 
-const items: {
-  label: string;
-  href: string;
-  description: string;
-  icon?: any;
-}[] = [
-  {
-    label: "Home",
-    href: "/",
-    description: "Main page",
-    icon: Icons.home,
-  },
-  {
-    label: "About",
-    href: "/about",
-    description: "About me",
-    icon: Icons.userCard,
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    description: "My recent posts",
-    icon: Icons.book,
-  },
-  {
-    label: "Animations",
-    href: "/animations",
-    description: "My recent posts",
-    icon: Icons.sparkles,
-  },
-];
+const items: { label: string; href: string; description: string }[] =
+  [
+    { label: "Home", href: "/", description: "Main page" },
+    { label: "About", href: "/about", description: "About me" },
+    // { label: "Blog", href: "/blog", description: "My recent posts" },
+    // {
+    //   label: "Animations",
+    //   href: "/animations",
+    //   description: "My recent posts",
+    // },
+  ];
 
 const [radius, padding] = [14, 2];
 const innerBorderRadius = `${radius}px`;
 const p = `${padding}px`;
 const outerBorderRadius = `${radius + padding}px`;
 
-export default function NavigationMenuDemo() {
-  const pathname = usePathname();
-  const [hovered, setHovered] = useState(pathname);
-  useEffect(() => {
-    setHovered(pathname);
-  }, [pathname]);
+export default function AnimatedNavbar() {
+  const [hovered, setHovered] = useState(items[0].href);
 
   return (
     <Stack align={"center"} p={p} borderRadius={outerBorderRadius}>
@@ -70,7 +44,7 @@ export default function NavigationMenuDemo() {
         borderWidth={2}
         borderColor={"black"}
         borderRadius={"inherit"}
-        onMouseLeave={() => setHovered(pathname)}
+        onMouseLeave={() => setHovered(items[0].href)}
         position={"relative"}
       >
         <Menu>
@@ -80,21 +54,21 @@ export default function NavigationMenuDemo() {
               px={4}
               py={2}
               position="relative"
-              as={Link}
-              href={item.href}
+              // as={Link}
+              // href={item.href}
               _hover={{ textDecor: "none" }}
               color={"white"}
               fontWeight={"medium"}
               onMouseEnter={() => setHovered(item.href)}
             >
-              <HStack
+              <chakra.span
+                borderRadius={innerBorderRadius}
                 mixBlendMode={"difference"}
                 position={"relative"}
                 zIndex={1}
               >
-                {item.icon && <Icon as={item.icon} />}
-                <chakra.span>{item.label}</chakra.span>
-              </HStack>
+                {item.label}
+              </chakra.span>
               {hovered == item.href && (
                 <ABox
                   position="absolute"
@@ -110,8 +84,7 @@ export default function NavigationMenuDemo() {
                   style={{ borderRadius: innerBorderRadius }}
                   w="100%"
                   h="100%"
-                  zIndex={0}
-                  layoutId="navbarItem"
+                  layoutId="navbarItemComponent"
                 />
               )}
             </AMenuButton>
