@@ -1,6 +1,11 @@
-import { chakra } from "@chakra-ui/react";
+import { chakra, shouldForwardProp } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 
 export const ABox = chakra(motion.div, {
-  shouldForwardProp: isValidMotionProp,
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+export const AMenuButton = chakra(motion.button, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
 });

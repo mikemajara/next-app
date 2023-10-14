@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -9,18 +10,23 @@ import {
   Menu,
   MenuButton,
   Stack,
+  chakra,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
-import { motion } from "framer-motion";
-import { ABox } from "./animated";
+import { ABox, AMenuButton } from "./animated";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { isHotkeyPressed, useHotkeys } from "react-hotkeys-hook";
 
 const items: { label: string; href: string; description: string }[] =
   [
     { label: "Home", href: "/", description: "Main page" },
     { label: "About", href: "/about", description: "About me" },
     { label: "Blog", href: "/blog", description: "My recent posts" },
+    {
+      label: "Animations",
+      href: "/animations",
+      description: "My recent posts",
+    },
   ];
 
 const [radius, padding] = [14, 2];
@@ -35,50 +41,59 @@ export default function NavigationMenuDemo() {
     setHovered(pathname);
   }, [pathname]);
 
+  const transitionDefaults = {};
+
   return (
-    <Stack
-      align={"center"}
-      p={p}
-      borderRadius={outerBorderRadius}
-      onMouseLeave={() => setHovered(pathname)}
-    >
+    <Stack align={"center"} p={p} borderRadius={outerBorderRadius}>
       <HStack
         p={p}
         borderWidth={2}
         borderColor={"black"}
         borderRadius={"inherit"}
+        onMouseLeave={() => setHovered(pathname)}
         position={"relative"}
       >
         <Menu>
           {items.map((item) => (
-            <Box px={4} py={2} position="relative" key={item.label}>
-              <Link
+            <AMenuButton
+              key={item.label}
+              px={4}
+              py={2}
+              position="relative"
+              as={Link}
+              href={item.href}
+              _hover={{ textDecor: "none" }}
+              color={"white"}
+              fontWeight={"medium"}
+              onMouseEnter={() => setHovered(item.href)}
+            >
+              <chakra.span
                 borderRadius={innerBorderRadius}
-                key={item.label}
-                onMouseEnter={() => setHovered(item.href)}
-                as={MenuButton}
-                href={item.href}
-                _hover={{ textDecor: "none" }}
-                color={"white"}
-                fontWeight={"medium"}
                 mixBlendMode={"difference"}
               >
                 {item.label}
-              </Link>
+              </chakra.span>
               {hovered == item.href && (
                 <ABox
                   position="absolute"
                   bg="gray.900"
                   top={0}
                   left={0}
-                  borderRadius={innerBorderRadius}
+                  transition={{
+                    ...transitionDefaults,
+                    duration: isHotkeyPressed("shift")
+                      ? 1.5
+                      : undefined,
+                  }}
+                  // Using chakra does not animate.
+                  style={{ borderRadius: innerBorderRadius }}
                   w="100%"
                   h="100%"
                   zIndex={-1}
                   layoutId="navbarItem"
                 />
               )}
-            </Box>
+            </AMenuButton>
           ))}
         </Menu>
       </HStack>

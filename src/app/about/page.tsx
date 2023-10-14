@@ -1,6 +1,7 @@
 "use client";
 
 import { Calendar } from "@/components/ui/calendar";
+import { chakra } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 export default function Page() {
@@ -8,12 +9,7 @@ export default function Page() {
 
   return (
     <div className="p-4 flex ">
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        className="rounded-md border"
-      />
+      <chakra.span>About</chakra.span>
     </div>
   );
 }

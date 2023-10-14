@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## NextJS App template
+
+Built with:
+- [NextJS 13 App](https://nextjs.org/docs/getting-started/installation)
+- [Chakra-UI](https://chakra-ui.com/)
+- [Shadcn](https://ui.shadcn.com/)
+
+Libraries:
+- [react-icons](https://react-icons.github.io/react-icons/search)
+- [react-hook-form](https://react-hook-form.com/)
+- [react-hotkeys-hook](https://github.com/JohannesKlauss/react-hotkeys-hook)
+
 ## Getting Started
 
 First, run the development server:
