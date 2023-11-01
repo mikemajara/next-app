@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Button, Container, Stack } from "@chakra-ui/react";
 import React, { ReactElement, ReactNode } from "react";
 
 export default function Layout({
@@ -7,8 +7,8 @@ export default function Layout({
   children: ReactNode | ReactElement;
 }) {
   return (
-    <Container maxW="container.lg" py={10}>
+    <Stack maxW="container.lg" py={10} minH="100vh" justify="center">
       {children}
-    </Container>
+    </Stack>
   );
 }

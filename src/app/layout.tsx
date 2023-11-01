@@ -2,9 +2,23 @@ import Navbar from "@/components/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  ColorModeScript,
+  Container,
+  Flex,
+  Grid,
+  HStack,
+  Icon,
+  SimpleGrid,
+  Stack,
+} from "@chakra-ui/react";
 import { Providers } from "./providers";
 import { theme } from "@/theme";
+import { Icons } from "@/components/icons";
+import { ButtonBack } from "@/components/logic/button-back";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +39,16 @@ export default function RootLayout({
           initialColorMode={theme.config.initialColorMode}
         />
         <Providers>
-          <Navbar />
-          {children}
+          <Container maxW="container.lg" h="full">
+            <HStack justify={"center"}>
+              {/* <ButtonBack /> */}
+
+              <Box>
+                <Navbar />
+              </Box>
+            </HStack>
+            {children}
+          </Container>
         </Providers>
       </body>
     </html>

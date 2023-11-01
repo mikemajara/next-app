@@ -51,7 +51,7 @@ const items: {
   },
 ];
 
-const [radius, padding] = [14, 2];
+const [radius, padding] = [10, 4];
 const innerBorderRadius = `${radius}px`;
 const p = `${padding}px`;
 const outerBorderRadius = `${radius + padding}px`;
@@ -66,7 +66,7 @@ export default function NavigationMenuDemo() {
   return (
     <Stack align={"center"} p={p} borderRadius={outerBorderRadius}>
       <HStack
-        p={p}
+        p={0.5}
         borderWidth={2}
         borderColor={"black"}
         borderRadius={"inherit"}
@@ -78,7 +78,7 @@ export default function NavigationMenuDemo() {
             <AMenuButton
               key={item.label}
               px={4}
-              py={2}
+              py={p}
               position="relative"
               as={Link}
               href={item.href}
@@ -110,7 +110,6 @@ export default function NavigationMenuDemo() {
                   style={{ borderRadius: innerBorderRadius }}
                   w="100%"
                   h="100%"
-                  zIndex={0}
                   layoutId="navbarItem"
                 />
               )}

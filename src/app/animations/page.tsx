@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import Navbar from "./(animations)/navbar";
+import Navbar from "./navbar/page";
 import {
   Box,
   Card,
@@ -14,7 +14,7 @@ import {
   Stack,
   Tag,
 } from "@chakra-ui/react";
-import { ABox, ACard } from "@/components/animated";
+import { ABox } from "@/components/animated";
 import { Link } from "@chakra-ui/next-js";
 import {
   CardAnimation,
@@ -24,7 +24,7 @@ import {
 const animations: CardAnimationProps[] = [
   {
     title: "Button",
-    href: "/navbar",
+    href: "/animations/navbar",
     tags: ["shared-layout"],
     component: <Navbar />,
   },
