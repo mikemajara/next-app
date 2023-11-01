@@ -43,12 +43,6 @@ const items: {
     description: "My recent posts",
     icon: Icons.book,
   },
-  {
-    label: "Animations",
-    href: "/animations",
-    description: "My recent posts",
-    icon: Icons.sparkles,
-  },
 ];
 
 const [radius, padding] = [10, 4];
